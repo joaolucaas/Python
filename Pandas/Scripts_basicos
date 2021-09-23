@@ -1,0 +1,24 @@
+
+import pandas as pd
+base1 = pd.read_excel("Amigos Clientes.xlsx")
+
+base1.head(); #retorna os 5 primeiros dados (cabecalho)
+
+base1.shape; #retorna o tamanho da base (linha, coluna)
+
+base1.columns = ("Cliente", "Endereco 1", "Complemento", "Universidade", "Produto Consumido", "NPS") #renomeando colunas
+
+base1['Complemento'].unique(); #primeiro retorna apenas a coluna complemento, depois cada valor que foi utilizado
+
+base1.Complemento; #tambem retorna apenas a coluna Complemento
+
+base1['Complemento'].value_counts(); #retorna a frequencia de cada valor
+
+base1.NPS.plot(); #Exemplo de plot default
+
+base1.NPS.plot(kind='hist'); #modelo histograma
+
+base1.NPS.describe();#descreve algumas estatisticas do bd
+
+print("Media",base1.NPS.mean())
+ print("Mediana",base1.NPS.median()) #intuitivo né
