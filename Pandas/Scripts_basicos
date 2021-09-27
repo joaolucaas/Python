@@ -21,4 +21,10 @@ base1.NPS.plot(kind='hist'); #modelo histograma
 base1.NPS.describe();#descreve algumas estatisticas do bd
 
 print("Media",base1.NPS.mean())
- print("Mediana",base1.NPS.median()) #intuitivo né
+print("Mediana",base1.NPS.median()) #intuitivo né
+
+dados.query("Turma==11").ClientId; #Filtra por campo (turma no caso)
+
+mediaIdade = dados.groupby("Turma").mean().Idade #agrupar por turma e apresentar a media da coluna idade
+
+
