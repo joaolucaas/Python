@@ -51,3 +51,7 @@ simp = {
 simp = pd.DataFrame(simp)
 sns.barplot(x = "Turma", y= "Quantidade", data = simp)
 
+
+#-------------------------------------------------------Exemplo QUERY :----------------------------------------------------
+dados.query("Turma != '11'")
+
