@@ -37,3 +37,17 @@ mediaIdade = dados.groupby("Turma").mean().Idade #agrupar por turma e apresentar
 
 dados["Turma"].value_counts().to_frame().reset_index()
 
+
+#---------------------------------------------------Criando Dataframe novo:-----------------------------------------------
+
+total_pessoas = dados.value_counts().sum()
+QTDTURMA = dados["Turma"].value_counts()
+total_011 = QTDTURMA.loc[11]
+total_outros = total_pessoas - total_011
+simp = {
+    "Turma": ["011", "Outros"],
+     "Quantidade": [total_011, total_outros]
+      }
+simp = pd.DataFrame(simp)
+sns.barplot(x = "Turma", y= "Quantidade", data = simp)
+
