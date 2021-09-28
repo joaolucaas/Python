@@ -46,3 +46,8 @@ plt.pie(QTDTURMA["Qtd"], labels = QTDTURMA["Turma"])
 #######################################################################
 
 sns.barplot(x = "Turma", y= "Quantidade", data = simp)
+
+############################### Formatando Gráfico ############################
+sns.lmplot(x="x", y="y", col="dataset", hue="dataset", data=df,
+           col_wrap=2, ci=None, palette="muted", height=4,
+           scatter_kws={"s": 50, "alpha": 1})
