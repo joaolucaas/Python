@@ -1,0 +1,23 @@
+CR_011 = dados.query("Turma == '11'")
+CR_Resto = dados.query("Turma != '11'")
+print(len(CR_011), len(CR_Resto))
+print("CR médio da 011:", CR_011.CR.mean())#média de uma coluna especifica (CR) com todos digitos
+print("CR médio da 011: %.2f"  % CR_011.CR.mean()) #com apenas 2 flutuantes
+print("CR médio do resto:", CR_Resto.CR.mean())
+print("CR médio do resto: %.3f"  % CR_Resto.CR.mean())#com 3 flutuantes
+
+# -------------------------- igual mas com mediana-----------------------------
+
+print("CR médio da 011:", CR_011.CR.median())#média de uma coluna especifica (CR) com todos digitos
+print("CR médio da 011: %.2f"  % CR_011.CR.median()) #com apenas 2 flutuantes
+print("CR médio do resto:", CR_Resto.CR.median())
+print("CR médio do resto: %.3f"  % CR_Resto.CR.median())#com 3 flutuantes
+
+###########[5.63]*10 #array de 2.5 10x
+###########np.array([5.63]*10) #array do numpy
+###########np.array([4.50]*10)
+
+sala1 = np.append(np.array([4.50]*10), np.array([5.63]*10))
+sala1.mean()
+np.median(sala1) #sintaxe do np para mediana é diferente
+np.std(sala1) #desvio padrão
