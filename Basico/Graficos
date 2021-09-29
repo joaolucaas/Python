@@ -1,0 +1,18 @@
+import matplotlib.pyplot as plt #biblioteca mais interna de graficos
+import seaborn as sns
+
+base1.NPS.plot(); #Exemplo de plot default
+
+base1.NPS.plot(kind='hist'); #modelo histograma
+
+sns.boxplot(base1.NPS); #boxplot da lib seaborn
+
+sns.distplot(mediaCR, bins=7) #bins escolhe a quantidade de colunas no histograma
+
+#definir tamanho do sns pelo matlib 
+plt.figure(figsize=(5,4))
+sns.boxplot(y=mediaCR)
+
+#DEFININDO TITULO COM O PLT
+plt.hist(mediaIdade, bins = 7)
+plt.title("Media de idade das turmas")
