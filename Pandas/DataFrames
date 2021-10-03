@@ -1,0 +1,48 @@
+
+import pandas as pd
+
+DadosAmigos = pd.read_excel("/Volumes/Arquivos200Gb/BD/DadosAmigos.xlsx") #exemplo para abrir arquivo no mac
+
+
+df_html = pd.read_html("https://www.federalreserve.gov/releases/h3/current/default.htm")  #abre os 3 dataframes existentes na pagina
+df_html[0]; #retorna o primeiro dataframe
+
+
+
+##Criando DataFrame
+data1 = [1, 2, 3, 4, 5] #cria uma lista
+serie = pd.Series(data1) #transforma a lista em serie
+index = ['Linha ' + str(i) for i in range(serie.shape[0])] #cria um indice com a palavra "Linha" no comeco e usa o tamanho da serie para as linhas
+serie = pd.Series(data = data1, index = index) #atualiza a lista com os novos indi
+
+
+data2 = {'Linha ' + str(i) : i + 1 for i in range(5)}
+serie2 = pd.Series(data2)
+serie3 = serie2 + 2
+serie4 = serie2 + serie3
+#print("Serie 1\n", serie, "\n\n", "Serie 2\n", serie2, "\n\n", "Serie 3\n", serie3, "\n\n", "Serie 4\n", serie4)
+
+
+Tipo_Dados = pd.DataFrame(DadosAmigos.dtypes, columns = ["Tipo de Dados"])#Fazer um dataframe com os tipos de cada variavel
+Tipo_Dados.columns.name = "Variável" #Renomear o index
+Tipo_Dados.shape # número de colunas e numeros, respectivamente, do DataFrame
+Tipo_Dados.shape[0]#colunas
+Tipo_Dados.shape[1]#linhas
+
+
+Cursos = DadosAmigos["Curso"]
+Cursos.drop_duplicates() #mantem o primeiro de cada item
+Cursos.drop_duplicates(inplace = True) #mantém a modificacao na variável
+
+
+Cursos = pd.DataFrame(Cursos)
+
+
+#Refazer o index
+Cursos.shape[0] #pegando o numero de dados que tem na variavel
+range(Cursos.shape[0]) #Cria uma lista de 0 até o numero de dados do curso. ex:
+#for i in range(Cursos.shape[0]):
+#    print(i)
+Cursos.index = (range(Cursos.shape[0]))
+Cursos
+
