@@ -1,0 +1,16 @@
+import pandas as pd
+
+DadosAmigos = pd.read_excel("/Volumes/Arquivos200Gb/BD/DadosAmigos.xlsx") #exemplo para abrir arquivo no mac
+
+###########ISIN, - COMPARAR DUAS LISTAS################
+
+
+zerovelhos = DadosAmigos["Turma"].isin(velhos) #comparar quais DadosAmigos estão na lista de velhos
+
+zerovelhos = DadosAmigos[zerovelhos] #adicionar os que estão à nova lista de zerovelhos
+
+list(DadosAmigos["Turma"].drop_duplicates()); #buscar todos anos de turma
+
+velhos = [8, 1, 9, 4, 0] #trazer apenas anos antes de 011
+
+zerovelhos.index = range(zerovelhos.shape[0]) #reconstruir index
