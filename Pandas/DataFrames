@@ -46,3 +46,8 @@ range(Cursos.shape[0]) #Cria uma lista de 0 até o numero de dados do curso. ex:
 Cursos.index = (range(Cursos.shape[0]))
 Cursos
 
+######### exportando df
+import pandas as pd
+Dados = pd.read_excel("/Users/joaolucaas/Documents/Python/DadosAmigos.xlsx")
+Dados = pd.DataFrame(Dados.Turma.drop_duplicates())
+Dados.to_csv("/Users/joaolucaas/Documents/Python/turmas.csv", sep=';', index=False)
