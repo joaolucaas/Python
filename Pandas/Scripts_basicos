@@ -31,4 +31,4 @@ dados.query("Turma==11").ClientId; #Filtra por campo (turma no caso)
 
 mediaIdade = dados.groupby("Turma").mean().Idade #agrupar por turma e apresentar a media da coluna idade
 
-
+list("123") #cria a lista a seguir: ["1","2","3"]
