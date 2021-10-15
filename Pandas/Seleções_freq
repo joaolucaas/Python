@@ -1,0 +1,15 @@
+#######Concatenar e (&) / ou (|) ################
+
+DadosAmigos=pd.read_excel("/Users/joaolucaas/Documents/Python/DadosAmigos.xlsx")
+selecao = (DadosAmigos["Turma"]==11) | (DadosAmigos["Turma"]==10) #Turma igual a 11 ou 10
+a = DadosAmigos[selecao].shape[0]
+
+selecao2 = (DadosAmigos["CR"] >= 4) & (DadosAmigos["CR"] <= 6)
+b = DadosAmigos[selecao2].shape[0]
+
+selecao3 = (DadosAmigos["CR"] >= 3) & (DadosAmigos["Turma"] >= 11) & ((DadosAmigos["Curso"] == "EQ") | (DadosAmigos["Curso"] == "EQN"))
+c = DadosAmigos[selecao3].shape[0]
+
+print("Nº de alunos turma '010' ou '011': {}".format(a))
+print("Nº de alunos com CR entre 4 e 6: {}".format(b))
+print("Nº de alunos com CR Maior que 3, das turmas maiores ou iguais a 11 e dos cursos de EQ ou EQN:",format(c))
