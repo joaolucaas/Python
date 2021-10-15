@@ -1,0 +1,19 @@
+import pandas as pd
+dados = pd.read_excel("/Users/joaolucaas/Documents/Python/DadosConc.xlsx")
+
+dados.isnull() #mostra os dados nulos como True
+dados.notnull() #mostra os dados "Não Nulos"como True
+dados[dados["Conclusao"].isnull()] #retorna todos dados com a conclusao nula
+dadosnotnull = dados.dropna(subset = ["Conclusao"]) #exclui as linhas com a conclusao nula
+
+sel1 = (dados["Idade"] >= 22) & (dados["Conclusao"].isnull()) #faz a selecao dos nulos com mais de 22 anos
+dadosnotnull2 = dados[~sel1] #o til fornece o inverso da selecao, ou seja, dados tera todos menos a selecao
+
+dadosnotnull3 = dados.fillna(0) #coloca o arg em todos null
+dadosnotnull4 = dados.fillna({"Conclusao":2}) #aqui podemos escolher a variavel que vamos alterar o arg de null
+
+testenull = ["João", None, "Lucas", None, "Caetano", None, None, "Corrêa", "Leite"]
+testenull = pd.Series(testenull)
+testenull.fillna(method = 'ffill') #copia os anteriores no lugar do nulo
+testenull.fillna(method = 'bfill', limit = 2) #copia o posterior no lugar do nulo, limit coloca a quantidade de vezes q pode fazer isso
+testenull.fillna(testenull.mean()) #rsrs, tira a media e coloca no lugar dos nulos (precisa ser numero)
