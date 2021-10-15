@@ -13,3 +13,24 @@ c = DadosAmigos[selecao3].shape[0]
 print("Nº de alunos turma '010' ou '011': {}".format(a))
 print("Nº de alunos com CR entre 4 e 6: {}".format(b))
 print("Nº de alunos com CR Maior que 3, das turmas maiores ou iguais a 11 e dos cursos de EQ ou EQN:",format(c))
+
+
+###########selecoes no DataFrame##############
+dados = pd.read_excel("/Users/joaolucaas/Documents/Python/DadosAmigos.xlsx")
+dados["ClientId"] #extrai a coluna indicada como série
+dados[["ClientId"]] #extrai a coluna como dataframe
+dados[["ClientId","Curso"]] #no DataFrame podemos chamar mais de uma coluna
+
+dados[:]#pegar df completo
+dados[:3]#pegar até a linha 3
+dados[3:]#pegar a partir da linha 3 
+dados[3:10]#pegar da linha 3 até a linha 10 
+dados[3:10][["ClientId", "CR"]] # escolher tambem as colunas que pegar
+dados
+
+dados.loc[4] # serie com a linha do indice 4
+dados.loc[[4, 9]] #dataframe com a linha do indice 4 e 9
+dados.loc[4, "CR"] #CR da linha de indice 4
+dados.iloc[4,4] #CR da linha de indice 4, mas apontando a coluna CR com indice de colunas 
+dados.loc[[12, 13, 14],['Idade', 'Turma', 'CR']] #chamar uma mini matriz dentro da matriz
+dados.iloc[[12,13,14],[2,3,4]] #idem, mas com numero dos indices
