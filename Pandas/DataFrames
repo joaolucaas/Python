@@ -51,3 +51,13 @@ import pandas as pd
 Dados = pd.read_excel("/Users/joaolucaas/Documents/Python/DadosAmigos.xlsx")
 Dados = pd.DataFrame(Dados.Turma.drop_duplicates())
 Dados.to_csv("/Users/joaolucaas/Documents/Python/turmas.csv", sep=';', index=False)
+
+
+############Criando e ordenando DF
+teste = pd.DataFrame(Dados, index = list("321"), columns = list("CBA"))
+teste.sort_index(inplace = True) #ordena pelo indice da linha
+teste.sort_index(inplace = True, axis=1)#ordena pelo indice da coluna
+
+teste.sort_values(by= ['1','2'], inplace = True, axis=1) #usa primeira ordem a linha 1 e depois a linha 2
+teste.sort_values(by= ['B','A'], inplace = True,) #usa primeira ordem a coluna B e depois a coluna A
+#inplace = True é utilizado para o comando modificar o dataframe
