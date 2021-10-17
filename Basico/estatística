@@ -65,3 +65,22 @@ for prod in grupo_prod.groups.keys(): #laço para criar o dados_new2 com as cond
     dados_new2 = pd.concat([dados_new2, dados_selecao2])
     
 dados_new2.boxplot(['Consumo'], by = ["Produto"])
+
+################################################################## AREA GRAFICOS ##################################################################
+
+area = plt.figure() #cria uma area com espaco para diversos graficos
+
+grafico1 = area.add_subplot(2, 2, 1) #adiciona um grafico na area de 2x2, no espaco 1
+grafico2 = area.add_subplot(2, 2, 2) #adiciona um grafico na area de 2x2, no espaco 2
+grafico3 = area.add_subplot(2, 2, 3) #adiciona um grafico na area de 2x2, no espaco 3
+grafico4 = area.add_subplot(2, 2, 4) #adiciona um grafico na area de 2x2, no espaco 4
+
+grafico1.scatter(dados_new2.Consumo, dados_new2.Produto) #gráfico valor x produto
+grafico1.set_title('valor x produto', size = 22, color = 'blue')
+
+grafico2.hist(dados_new2.Consumo, orientation = 'horizontal')
+grafico2.set_title('Histograma Horizontal')
+
+grafico3.plot(dados_new2["Consumo"].sort_values(), range(dados_new2.shape[0]))
+
+grafico4.bar(dados_new2["NPS"].sort_values(), range(dados_new2.shape[0]))
