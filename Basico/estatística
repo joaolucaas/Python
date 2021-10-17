@@ -21,3 +21,47 @@ sala1 = np.append(np.array([4.50]*10), np.array([5.63]*10))
 sala1.mean()
 np.median(sala1) #sintaxe do np para mediana é diferente
 np.std(sala1) #desvio padrão
+
+
+############################################################# BOXPLOT E OUTLIER ####################################################################
+%matplotlib inline
+import pandas as pd
+import matplotlib.pyplot as plt
+plt.rc('figure', figsize = (14, 6))
+dados = pd.read_excel('/Users/joaolucaas/Documents/Python/Amigos Clientes.xlsx')
+dados.boxplot(["Consumo"]) #boxplot com outlier
+
+
+##### estats boxplot
+
+consumo = dados["Consumo"]
+Q1 = consumo.quantile(.25) #primeiro quartil
+Q3 = consumo.quantile(.75) #terceiro quartil
+IIQ = Q3 - Q1 #intervalo interquartil
+
+limite_inferior = Q1 - 1.5 * IIQ
+limite_superior = Q3 + 1.5 * IIQ
+
+selecao = ((consumo >= limite_inferior) & (consumo <= limite_superior)) #RETIRANDO OS OUTLIERS 
+dados_new = dados[selecao]
+dados_new.boxplot(["Consumo"])
+
+dados_new.boxplot(["Consumo"], by = ['Produto']) #variacao do consumo por tipo de produto
+grupo_tipo = dados_new.groupby('Produto')["Consumo"] #criando um novo grupo para plotar os boxplot de outro jeito
+
+
+Q1 = grupo_prod.quantile(.25)
+Q3 = grupo_prod.quantile(.75)
+IIQ = Q3-Q1
+limite_sup = Q1 + 1.5 * IIQ
+limite_inf = Q3 - 1.5 * IIQ
+
+dados_new2 = pd.DataFrame()
+for prod in grupo_prod.groups.keys(): #laço para criar o dados_new2 com as condicoes de cada produto estar dentro do intervalo de outlier
+    ehproduto = dados["Produto"] == prod
+    dentro_limite = (dados['Consumo'] >= limite_inf[prod]) & (dados['Consumo'] <= limite_sup[prod])
+    selecao2 = ehproduto & dentro_limite 
+    dados_selecao2 = dados[selecao2]
+    dados_new2 = pd.concat([dados_new2, dados_selecao2])
+    
+dados_new2.boxplot(['Consumo'], by = ["Produto"])
