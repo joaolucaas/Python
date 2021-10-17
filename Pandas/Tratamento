@@ -17,3 +17,58 @@ testenull = pd.Series(testenull)
 testenull.fillna(method = 'ffill') #copia os anteriores no lugar do nulo
 testenull.fillna(method = 'bfill', limit = 2) #copia o posterior no lugar do nulo, limit coloca a quantidade de vezes q pode fazer isso
 testenull.fillna(testenull.mean()) #rsrs, tira a media e coloca no lugar dos nulos (precisa ser numero)
+
+
+
+################################################## visualizacoes ####################################################
+dados = pd.read_excel("/Users/joaolucaas/Documents/Python/DadosAmigos.xlsx")
+dados["AnoLimite"] = dados["Turma"] + 2005 + 10 #pensando que todos os cursos iniciaram em 2005 e que têm por padrão, 10 anos de limite 
+#integral = ["EQ", "Farma", "Quimica"]
+noturno = ["EQN", "FarmaN"]
+dados["Formatura"] = dados["Curso"].apply(lambda x: "Noturno" if x in noturno else "Integral") #cria uma nova coluna distinguindo quem esta na lista de integral e quem está nao estad
+#del dados["Formatura"]
+#
+#dados.pop("Formatura")
+dados.drop(['Formatura', 'AnoLimite'], axis = 1, inplace = True)
+dados.Turma.unique()
+dados["Turma"].value_counts()
+
+######################### agrupamento#####################
+import pandas as pd
+dados = pd.read_excel("/Users/joaolucaas/Documents/Python/DadosAmigos.xlsx")
+dados
+
+dados.Idade.mean() #media das idades
+
+outros = ['Enfermagem', 'Publicidade', 'Design', 'EngCivil', 'RH', '-', 'Escola'] #selecao dos dados que quero agrupar
+selecao = dados["Curso"].isin(outros) #selecao em dados com os cursos de 'outros'
+dados = dados[selecao] # selecao aplicada
+grupo_curso = dados.groupby('Curso') #agrupamento com os outros
+grupo_curso.groups #visualizacao de quais itens estão os 'Outros'
+
+for outros, data in grupo_curso:
+    print('{} => {}'.format(outros, data['Idade'].mean()))
+#laço para criar print com a media de idade dos outros cursos
+
+grupo_curso[['CR','Idade']].mean().round(2) #mesma funcao anterior utilizando o grupo e com o CR
+
+grupo_curso['Idade'].describe() #retorna algumas estatisticas basicas, contagem, media, desvio padrao, minimo, 1o quartil, mediana, 3 quartil e maximo
+grupo_curso['Idade'].aggregate(['min', 'max']) #aqui retorna as estatisticas que pedirmos, procurar disponiveis na doc
+
+################## MATPLOTLIB ####################
+#(lib do matlab)
+#config do matplotlib
+%matplotlib inline
+import matplotlib.pyplot as plt
+plt.rc('figure', figsize = (20,10))
+
+grafico = grupo_curso['Idade'].mean().plot.bar(color = 'red') #grafico do matlab com a media, alterando a cor
+grafico.set_ylabel('Média de idades', {'fontsize': 22}) #adicionando titulo do eixo y e alterando tamanho da fonte
+grafico.set_title('Media por cursos', {'fontsize': 50}) #adicionando titulo e tamanho da fonte tb
+
+
+classes_idade = [0, 20, 22, 24, 100] #limite de idade para cada classe
+Idades = pd.cut(dados['Idade'], classes_idade)
+pd.value_counts(Idades)
+col = ['até 20 anos', '20 a 22 anos', '22 a 24 anos', 'mais de 24 anos']
+Idades = pd.cut(dados['Idade'], classes_idade, labels = col, include_lowest = True)#trocar as colunas e adicionar quem eventualmente tenha 0 anos
